@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "apparatum:block/deep_pump"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "apparatum:item/configurator",
+  "textures": {
+    "layer0": "apparatum:item/configurator"
+  }
+}

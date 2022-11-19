@@ -1,0 +1,7 @@
+{
+  "block.apparatum.deep_pump": "Deep Pump",
+  "item.apparatum.configurator": "Configurator",
+  "itemGroup.apparatum": "Apparatum",
+  "message.deep_pump": "Extracts ore-filled fluids from below bedrock.",
+  "screen.apparatum.deep_pump": "Deep Pump"
+}
