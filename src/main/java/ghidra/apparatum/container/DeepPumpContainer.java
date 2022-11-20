@@ -76,6 +76,10 @@ public class DeepPumpContainer extends ApparatumContainer {
         return (int) Math.ceil(tileEntity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getMaxEnergyStored).orElse(0) / (double)TALL_CONTAINER_HEIGHT);
     }
 
+    public int getMaxEnergy() {
+        return tileEntity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getMaxEnergyStored).orElse(0);
+    }
+
     public int getEnergy() {
         return tileEntity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
     }

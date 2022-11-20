@@ -17,7 +17,7 @@ public class DeepPumpTile extends ApparatumTile implements BlockEntityTicker<Dee
     private boolean need3x3Sky = false;
 
     public DeepPumpTile(BlockPos pPos, BlockState pBlockState) {
-        super(Registration.DEEP_PUMP_TE.get(), pPos, pBlockState);
+        super(Registration.DEEP_PUMP_TE.get(), pPos, pBlockState, 80000, 1000, 200, 8000);
     }
 
     @Override
@@ -42,6 +42,7 @@ public class DeepPumpTile extends ApparatumTile implements BlockEntityTicker<Dee
     }
 
     private void consoleDebug() {
+        System.out.println("DEEP PUMP TILE ========");
         System.out.println("progress: " + progress);
         System.out.println("rf: " + energyStorage.getEnergyStored());
         System.out.println("fluid amount: " + fluidStorage.getAmount() );
@@ -51,7 +52,7 @@ public class DeepPumpTile extends ApparatumTile implements BlockEntityTicker<Dee
 
     //TODO LOGIC FOR HOW MUCH FLUID IS GENERATED
     public FluidStack generateFluid() {
-        return new FluidStack(Fluids.WATER, 1);
+        return new FluidStack(Fluids.WATER, 10);
     }
 
     private boolean aboveBedrockAndCanSeeSky(Level pL, BlockPos pos) {

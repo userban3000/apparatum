@@ -1,7 +1,7 @@
 1dbbe0362131db84563a98f89059e7c2ef73da26 assets/apparatum/blockstates/deep_pump.json
 cb5dcb256200d41714c37880d6fb05a495ed6b14 assets/apparatum/lang/en_us.json
 13ded2f75420057486b896f61321c602a233dcf4 assets/apparatum/models/block/deep_pump.json
-b4e92ad202102c57b235c37e81ca88eaffe2ddee assets/apparatum/models/item/configurator.json
+90afd580c156703ad9ab251714da5813d7114ca1 assets/apparatum/models/item/configurator.json
 054f3ae6ecda142f67da613f8aeafbc5d7f4bf1e assets/apparatum/models/item/deep_pump.json
 5e96af6c8b5c527405a63fcb5a059467d8341168 data/minecraft/tags/blocks/mineable/pickaxe.json
 5e96af6c8b5c527405a63fcb5a059467d8341168 data/minecraft/tags/blocks/needs_iron_tool.json

@@ -17,6 +17,6 @@ public class ApparatumItemModels extends ItemModelProvider {
         ResourceLocation rl = new ResourceLocation(Apparatum.MOD_ID, "name");
 
         withExistingParent(Registration.DEEP_PUMP_ITEM.get().getRegistryName().getPath(), modLoc("block/deep_pump"));
-        singleTexture(Registration.CONFIGURATOR.get().getRegistryName().getPath(), modLoc("item/configurator"), "layer0", modLoc("item/configurator"));
+        singleTexture(Registration.CONFIGURATOR.get().getRegistryName().getPath(), mcLoc("item/iron_ingot"), "layer0", modLoc("item/configurator"));
     }
 }

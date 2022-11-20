@@ -54,6 +54,7 @@ public class DeepPumpBlock extends Block implements EntityBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecated")
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
             BlockEntity tileEntity = pLevel.getBlockEntity(pPos);

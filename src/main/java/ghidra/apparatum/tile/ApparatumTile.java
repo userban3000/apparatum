@@ -20,11 +20,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ApparatumTile extends BlockEntity implements ICapabilityProvider, IFluidHandler, IEnergyStorage {
-    private final int energy_capacity = 80000;
-    private final int max_receive = 80000;
-    private final int max_extract = 80000;
+    private int energy_capacity;
+    private int max_receive;
+    private int max_extract;
 
-    private final int fluid_capacity = 8000;
+    private int fluid_capacity;
 
     public final ApparatumEnergyStorage energyStorage;
     private LazyOptional<ApparatumEnergyStorage> energyStorageLazyOptional;
@@ -32,13 +32,24 @@ public class ApparatumTile extends BlockEntity implements ICapabilityProvider, I
     public final ApparatumFluidStorage fluidStorage;
     private LazyOptional<ApparatumFluidStorage> fluidStorageLazyOptional;
 
-    public ApparatumTile(BlockEntityType pType, BlockPos pPos, BlockState pBlockState) {
+    public ApparatumTile(BlockEntityType pType, BlockPos pPos, BlockState pBlockState, int energy, int max_receive, int max_extract, int fluid_capacity) {
         super(pType, pPos, pBlockState);
+
+        this.energy_capacity = energy;
+        this.max_receive = max_receive;
+        this.max_extract = max_extract;
+        this.fluid_capacity = fluid_capacity;
+
         this.energyStorage = new ApparatumEnergyStorage(energy_capacity, max_receive, max_extract, this);
         this.fluidStorage = new ApparatumFluidStorage(fluid_capacity);
 
         this.energyStorageLazyOptional = LazyOptional.of(() -> this.energyStorage);
         this.fluidStorageLazyOptional = LazyOptional.of(() -> this.fluidStorage);
+
+    }
+
+    public ApparatumTile(BlockEntityType pType, BlockPos pPos, BlockState pBlockState) {
+        this(pType, pPos, pBlockState, 80000, 2000, 2000, 8000);
     }
 
     @NotNull

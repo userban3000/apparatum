@@ -8,13 +8,19 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.InventoryMenu;
+import org.lwjgl.system.CallbackI;
+
+import javax.swing.text.Style;
+import java.util.List;
 
 public class DeepPumpScreen extends AbstractContainerScreen<DeepPumpContainer> {
     private final ResourceLocation GUI = new ResourceLocation(Apparatum.MOD_ID, "textures/gui/deep_pump.png");
     private final ResourceLocation ENERGY = new ResourceLocation(Apparatum.MOD_ID, "textures/gui/energy.png");
+    private final ResourceLocation ENERGY_SLICE = new ResourceLocation(Apparatum.MOD_ID, "textures/gui/energy_slice.png");
 
     public DeepPumpScreen(DeepPumpContainer pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -28,13 +34,22 @@ public class DeepPumpScreen extends AbstractContainerScreen<DeepPumpContainer> {
         this.renderTooltip(pPoseStack, pMouseX, pMouseY);
     }
 
-    private void drawEnergy(PoseStack matrix) {
-
-    }
-
     @Override
     protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
         drawString(pPoseStack, Minecraft.getInstance().font, "Deep Pump", 56, 6, 0x8b8b8b);
+    }
+
+    @Override
+    protected void renderTooltip(PoseStack pPoseStack, int pX, int pY) {
+        if (isHovering(12, 9, 10, 72, pX, pY)) {
+            Component t = new TextComponent(getEnergyString());
+            renderTooltip(pPoseStack, t, pX, pY);
+        }
+    }
+
+    protected String getEnergyString() {
+        int currEnergy = menu.getEnergy();
+        return currEnergy / 1000 + "." + (currEnergy % 1000)/100 + "k FE / 80.0k FE";
     }
 
     @Override
@@ -44,12 +59,22 @@ public class DeepPumpScreen extends AbstractContainerScreen<DeepPumpContainer> {
         int relY = (this.height - this.imageHeight) / 2;
         this.blit(pPoseStack, relX, relY, 0, 0, this.imageWidth, this.imageHeight);
 
-        int percent = menu.getMaxEnergyScaled() - menu.getEnergy();
+        int pixelsDown = (int)Math.ceil( ((double)menu.getEnergy() / (double)menu.getMaxEnergy()) * 70.0d);
 
-        if (percent != 0 && this.minecraft != null) {
-            TextureAtlasSprite sprite = minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ENERGY);
+        if (Apparatum.CONSOLE_DEBUG_ENABLED) {
+            System.out.println("DEEP PUMP SCREEN ========");
+            System.out.println("energy:" + menu.getEnergy());
+            System.out.println("max energy:" + menu.getMaxEnergy());
+            System.out.println("pixdown:" + pixelsDown);
+            System.out.println("=================");
+        }
+
+        if (pixelsDown > 2 && this.minecraft != null) {
+            TextureAtlasSprite sprite = minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ENERGY_SLICE);
             RenderSystem.setShaderTexture(0, ENERGY);
-            this.blit(pPoseStack, relX + 11, relY + 9 + percent, 0, 0, 10, 72 - percent);
+            for (int i = 0; i < pixelsDown; i+=2 ) {
+                this.blit(pPoseStack, relX + 11, relY + 76 - i, 0, 0, 10, 2);
+            }
         }
     }
 }
